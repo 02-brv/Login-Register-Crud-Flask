@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Registrasi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 py-8 flex items-center justify-center min-h-screen">
+
+  <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+    <div class="text-center mb-6">
+      <h4 class="text-2xl font-semibold">Form Registrasi</h4>
+    </div>
+
+    <!-- Pesan Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="mb-4">
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}} bg-red-100 text-red-800 p-4 rounded-lg mb-4">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Form Registrasi -->
+    <form action="{{url_for('registrasi')}}" method="post">
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input type="text" id="username" name="username" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan Username" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan Email" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" name="password" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan Password" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+        <select name="role" id="role" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+          <option value="">Pilih Role</option>
+          <option value="Web developer">Web developer</option>
+          <option value="Game developer">Game developer</option>
+          <option value="Data scientist">Data scientist</option>
+          <option value="Cyber security analyst">Cyber security analyst</option>
+        </select>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button type="submit" class="w-full bg-emerald-500 text-white py-3 rounded-md shadow-md hover:bg-yellow-500 focus:outline-none">Registrasi</button>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">Sudah Punya Akun? <a href="{{url_for('login')}}" class="text-blue-600 hover:text-blue-700">Login</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
